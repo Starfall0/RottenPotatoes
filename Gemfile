@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 ruby '2.6.6'
 gem 'rails', '4.2.11'
 
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection', '~> 0.1'
 
 gem 'sass-rails', '~> 5.0.3'
 gem 'uglifier', '>= 2.7.1'

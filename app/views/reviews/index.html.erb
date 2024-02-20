@@ -1,0 +1,13 @@
+<!-- app/views/reviews/index.html.erb -->
+<h2>Reviews for <%= @movie.title %></h2>
+
+<% @reviews.each do |review| %>
+  <div>
+    <strong>Moviegoer:</strong> <%= review.moviegoer_id %><br>
+    <strong>Rating:</strong> <%= review.potatoes %><br>
+    <strong>Comment:</strong> <%= review.comments %><br>
+    <!-- Add other review details as needed -->
+  </div>
+  <hr>
+<% end %>
+<%= link_to 'Back to movie list', movies_path, class: 'btn btn-primary col-2' %>

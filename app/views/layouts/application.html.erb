@@ -11,7 +11,15 @@
   <body>
     <%# These classes come from the Bootstrap CSS framework. %>
     <nav class="navbar navbar-expand-lg bg-primary text-white mb-3">
-      <h1 class="title">Rotten Potatoes!</h1>
+      <div class="container d-flex justify-content-between align-items-center">
+        <h1 class="title"><%= link_to 'Rotten Potatoes!', root_path, class: 'text-white' %></h1>
+        <% if user_signed_in? %>
+          <%= content_tag :span, current_user.name, class: 'p-1', style: 'color: #68FF33;' %>
+          <%= button_to 'Logout', logout_path, method: :post, data: { turbo: false }, class: 'btn btn-primary' %>
+        <% else %>
+          <%= button_to 'Sign in with Google', login_path, method: :get, class: 'btn btn-primary', data: { turbo: false } %>
+        <% end %>
+      </div>
     </nav>
     <div class="container">
       <%# Render "flash" messages in our application. This loads _flash.erb %>

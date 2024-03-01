@@ -1,20 +1,24 @@
+# frozen_string_literal: true
+
 class ReviewsController < ApplicationController
-  before_filter :has_moviegoer_and_movie, :only => [:new, :create]
-  
+  before_filter :has_moviegoer_and_movie, only: %i[new create]
+
   protected
+
   def has_moviegoer_and_movie
     @current_user ||= Moviegoer.find(session[:user_id]) if session[:user_id].present?
     unless @current_user
       flash[:warning] = 'You must be logged in to create a review.'
       redirect_to login_path
     end
-    unless (@movie = Movie.where(:id => params[:movie_id]))
-      flash[:warning] = 'Review must be for an existing movie.'
-      redirect_to movies_path
-    end
+    return if (@movie = Movie.where(id: params[:movie_id]))
+
+    flash[:warning] = 'Review must be for an existing movie.'
+    redirect_to movies_path
   end
-  
+
   public
+
   def new
     @review = @movie.reviews.build
   end
@@ -27,7 +31,7 @@ class ReviewsController < ApplicationController
     @movie = Movie.find(params[:movie_id]) # Find the movie based on the ID
     @review = @movie.reviews.build(review_params) # Build a new review for this movie
     @review.moviegoer = @current_user # Associate the review with the current user
-  
+
     if @review.save
       redirect_to movie_path(@movie), notice: 'Review was successfully created.'
     else

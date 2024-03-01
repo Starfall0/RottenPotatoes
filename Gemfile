@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 ruby '2.6.6'
@@ -19,8 +21,8 @@ end
 # for Heroku deployment - as described in Ap. A of ELLS book
 group :development, :test do
   gem 'byebug'
-  gem 'database_cleaner'
   gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
   gem 'rspec-rails'
 
   gem 'pry'
